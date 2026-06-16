@@ -4,40 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookMyShow</title>
+     <link rel="stylesheet" href="style1.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
 </head>
 <body>
     <header>
-        <div>
+        <div id="header">
+            <div id="headerbox1">
             <img src="https://cdn.prod.website-files.com/6870d8b0c53776c9e8ae3c53/6884543540ff0915c9f852b0_65b6384089ec9e265952391f_bookmyshow-logo-vector-removebg-preview%2520(1).png" alt="" height="40px" > &nbsp;&nbsp;
-            <input type="search" placeholder="Search for Movies, Event, Plays, Sports and Activities" size="60"/> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+            <input type="search" id="searchMovie" placeholder="Search for Movies, Event, Plays, Sports and Activities" size="60"/>
+            </div>
+            <div id="headerbox2">
             <select>
                 <option>--Select location--</option>
                 <option>Mumbai</option>
                 <option>Banglore</option>
                 <option>Delhi</option>
             </select>
-            <button>SignIn</button>&emsp;
-            <button>Menu</button>
+            &emsp;<button style="background-color: #eb4e62; color: aliceblue;">SignIn</button>&emsp;
+            <span class="material-symbols-outlined">menu</span>
+            </div>
         </div>
-    </header>
-    <hr>
-    <nav>
-        <button>Movies</button>&nbsp;
-        <button>Stream</button>&nbsp;
-        <button>Events</button>&nbsp;
-        <button>Plays</button>&nbsp;
-        <button>Sports</button>&nbsp;
-        <button>Acivities</button>&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-        <button>List Your Show</button>&nbsp;
-        <button>Corporates</button>&nbsp;
-        <button>Offers</button>&nbsp;
-        <button>Gift Cards</button>
+    </header><br>
+    <nav id="navbar">
+        <div id="navbarbox1">
+        <a href="#">Movies</a>&emsp;
+        <a href="#">Stream</a>&emsp;
+        <a href="#">Events</a>&emsp;
+        <a href="#">Plays</a>&emsp;
+        <a href="#">Sports</a>&emsp;
+        <a href="#">Acivities</a>
+        </div>
+        <div id="navbarbox2">
+        <a href="#">List Your Show</a>&emsp;
+        <a href="#">Corporates</a>&emsp;
+        <a href="#">Offers</a>&emsp;
+        <a href="#">Gift Cards</a>
+        </div>
         
     </nav>
     <hr>
     <br>
-    <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1779712824968_jsmumweb.jpg" alt="movie Image" width="100%">
 
+    <div class="slider">
+        <div class="slides">
+            <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1779712824968_jsmumweb.jpg" alt="img 1">
+            <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1781177294730_thearboristweb12june.jpg" alt="image 2">
+            <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1776147500464_popwebnew.jpg" alt="image 3">
+        </div>
+    
+        <button class="prev btn"> &lt; </button>
+        <button class="next btn"> &gt; </button>
+    </div>
     <h2>Recommended Movies</h2>
     <hr>
     <table cellpadding="10">
@@ -58,11 +76,11 @@
             </td>
         </tr>
         <tr>
-            <td>The Great Grand Superhero</td>
-            <td>Deool Band 2</td>
-            <td>Chand Mera Dil</td>
-            <td>Obession</td>
-            <td>Pati Patni aur Woh Do</td>
+            <td class="movie-name">The Great Grand Superhero</td>
+            <td class="movie-name">Deool Band 2</td>
+            <td class="movie-name">Chand Mera Dil</td>
+            <td class="movie-name">Obession</td>
+            <td class="movie-name">Pati Patni aur Woh Do</td>
         </tr>
         
     </table>
@@ -118,11 +136,11 @@
             </td>
         </tr>
         <tr>
-            <td>Andhela Ravamidhi</td>
-            <td>Die Drei??? Toteninsel</td>
-            <td>Lee Cronin's The Mummy</td>
-            <td>Once Upon a Time in GAZA</td>
-            <td>The Botanist</td>
+            <td class="movie-name">Andhela Ravamidhi</td>
+            <td class="movie-name">Die Drei??? Toteninsel</td>
+            <td class="movie-name">Lee Cronin's The Mummy</td>
+            <td class="movie-name">Once Upon a Time in GAZA</td>
+            <td class="movie-name">The Botanist</td>
         </tr>
         <tr>
             <td>Telugu</td>
@@ -176,6 +194,52 @@
         
     </table>
     </div>
-    
+
+
+
+
+
+
+    <script>
+
+        const searchInput = document.getElementById("searchMovie");
+        searchInput.addEventListener("keyup", function () {
+            let searchText = searchInput.value.toLowerCase();
+
+            let movies = document.querySelectorAll(".movie-name");
+
+            movies.forEach(movie => {
+                let movieName = movie.textContent.toLowerCase();
+
+                if (movieName.includes(searchText)) {
+                    movie.style.display = "";
+                } else {
+                    movie.style.display = "none";
+                }
+            });
+        });
+
+
+        const slides = document.querySelector(".slides");
+        const images = document.querySelectorAll(".slides img");
+
+        let index = 0;
+        const totalImages = images.length;
+
+        function showSlide() {
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        document.querySelector(".next").addEventListener("click", () => {
+            index = (index + 1) % totalImages;
+            showSlide();
+        });
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            index = (index - 1 + totalImages) % totalImages;
+            showSlide();
+        });
+
+    </script>
 </body>
 </html>
